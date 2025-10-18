@@ -1,0 +1,13 @@
+.vscode/
+
+*.o
+
+*.out
+a.out
+main
+practice
+practice2
+CWH_DSA
+
+*.dSYM/
+*.plist
