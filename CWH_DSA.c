@@ -111,11 +111,15 @@ typedef struct Node
 struct Node *head;
 struct Node *second;
 struct Node *third;
+struct Node *fourth;
+struct Node *fifth;
 
 void CreateLinkedList(){
     head = (Node *)malloc(sizeof(Node));
     second = (Node *)malloc(sizeof(Node));
     third = (Node *)malloc(sizeof(Node));
+    fourth = (Node *)malloc(sizeof(Node));
+    fifth = (Node *)malloc(sizeof(Node));
 
     // first & second node linked
     head->data = 7;
@@ -125,9 +129,17 @@ void CreateLinkedList(){
     second->data = 14;
     second->next = third;
 
-    // third node points to null
+    // third & fourth node linked
     third->data = 13;
-    third->next = NULL; // terminate Linked list at third node
+    third->next = fourth;
+
+    // fourth & fifth node linked
+    fourth->data = 83;
+    fourth->next = fifth;
+
+    // fifth node points to NULL
+    fifth->data = 221;
+    fifth->next = NULL; // terminate Linked list at last node
 };
 
 void LinkedListTraversal(struct Node *ptr)
@@ -141,56 +153,117 @@ void LinkedListTraversal(struct Node *ptr)
 };
 
 // Inserting data at head 
-struct Node*  InsertDataAtHead(struct Node *head, int data){
-    struct Node* ptr = (Node*)malloc(sizeof(Node));
-    ptr->data = data;
-    ptr->next = head;
-    return ptr;
-};
+// struct Node*  InsertDataAtHead(struct Node *head, int data){
+//     struct Node* ptr = (Node*)malloc(sizeof(Node));
+//     ptr->data = data;
+//     ptr->next = head;
+//     return ptr;
+// };
 
-// Inserting data in middle randomly 
-struct Node*  InsertDataInMiddle(struct Node *head, int data, int index){
-    struct Node* ptr = (Node*)malloc(sizeof(Node));
-    struct Node* p = head;
-    int i = 0;
-    while (i != index-1)
-    {
-        p = p->next;
-        i++;
-    }
-    ptr->data = data;
-    ptr->next = p->next;
-    p->next = ptr;
-    return head;
-};
+// // Inserting data in middle randomly 
+// struct Node*  InsertDataInMiddle(struct Node *head, int data, int index){
+//     struct Node* ptr = (Node*)malloc(sizeof(Node));
+//     struct Node* p = head;
+//     int i = 0;
+//     while (i != index-1)
+//     {
+//         p = p->next;
+//         i++;
+//     }
+//     ptr->data = data;
+//     ptr->next = p->next;
+//     p->next = ptr;
+//     return head;
+// };
 
-// Inserting data at specific node
-struct Node*  InsertDataAtSpecificNode(struct Node *head, struct Node *prevNode, int data){
-    // A pointer will be given in this case pointing to a node
-    struct Node* ptr = (Node*)malloc(sizeof(Node));
-    ptr->data = data;
+// // Inserting data at specific node
+// struct Node*  InsertDataAtSpecificNode(struct Node *head, struct Node *prevNode, int data){
+//     // A pointer will be given in this case pointing to a node
+//     struct Node* ptr = (Node*)malloc(sizeof(Node));
+//     ptr->data = data;
 
-    ptr->next = prevNode->next;
-    prevNode->next = ptr;
+//     ptr->next = prevNode->next;
+//     prevNode->next = ptr;
 
+//     return head;
+// };
 
-    return head;
-};
+// // Inserting data at end
+// struct Node*  InsertDataAtEnd(struct Node *head, int data){
+//     struct Node* ptr = (Node*)malloc(sizeof(Node));
+//     ptr->data = data;
+//     struct Node* p = head;
 
-// Inserting data at end
-struct Node*  InsertDataAtEnd(struct Node *head, int data){
-    struct Node* ptr = (Node*)malloc(sizeof(Node));
-    ptr->data = data;
-    struct Node* p = head;
+//     while (p->next != NULL)
+//     {
+//         p = p->next;
+//     }
+//     p->next = ptr;
+//     ptr->next = NULL;
+//     return head;
+// };
 
-    while (p->next != NULL)
-    {
-        p = p->next;
-    }
-    p->next = ptr;
-    ptr->next = NULL;
-    return head;
-};
+// Deleting Node at head
+// struct Node* DeleteAtHead(struct Node* head){
+//     struct Node* ptr = head;
+//     head = head->next;
+//     free(ptr);
+
+//     return head;
+// };
+
+// // Deleting Node in between randomly 
+// struct Node* DeleteInMiddle(struct Node* head, int index){
+//     struct Node* p = head;
+//     struct Node* q = head->next;
+//     for (int i = 0; i < (index-1); i++)
+//     {
+//         p = p->next;
+//         q = q->next;
+//     }
+//     p->next = q->next;
+//     free(q);
+    
+//     return head;
+// };
+
+// // Deleting specific given Node in between
+// struct Node* DeleteSpecificNode(struct Node* head, int value){
+//     struct Node* p = head;
+//     struct Node* q = head->next;
+//     while (q->data != value && q->next != NULL)
+//     {
+//         p = p->next;
+//         q = q->next;
+//     }
+    
+//     if (q->data == value)
+//     {
+//         p->next = q->next;
+//         free(q);
+//     }
+//     else
+//     {
+//         printf("\nNo such element found\n");
+//     }
+
+//     return head;
+// };
+
+// // Deleting Node at the end
+// struct Node* DeleteAtEnd(struct Node* head){
+//     struct Node* p = head;
+//     struct Node* q = head->next;
+//     while (q->next != NULL)
+//     {
+//         p = p->next;
+//         q = q->next;
+//     }
+//     p->next = NULL;
+//     free(q);
+
+//     return head;
+// };
 
 int main()
 {
@@ -202,6 +275,12 @@ int main()
     //head = InsertDataInMiddle(head, 25, 3);
     //head = InsertDataAtSpecificNode(head, second, 2);
     //head = InsertDataAtEnd(head, 62);
+
+    // Deleting Node
+    //head = DeleteAtHead(head);
+    //head = DeleteInMiddle(head, 2);
+    //head = DeleteSpecificNode(head, 100);
+    //head = DeleteAtEnd(head);
 
     // printing the list
     LinkedListTraversal(head);
