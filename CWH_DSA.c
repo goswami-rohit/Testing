@@ -106,6 +106,7 @@ typedef struct Node
 {
     int data;
     struct Node *next; // self-referencing pointer
+    struct Node *prev;
 } Node;
 
 struct Node *head;
@@ -265,10 +266,122 @@ void LinkedListTraversal(struct Node *ptr)
 //     return head;
 // };
 
+// void CircularLinkedList(){
+//     head = (Node *)malloc(sizeof(Node));
+//     second = (Node *)malloc(sizeof(Node));
+//     third = (Node *)malloc(sizeof(Node));
+//     fourth = (Node *)malloc(sizeof(Node));
+//     fifth = (Node *)malloc(sizeof(Node));
+
+//     // first & second node linked
+//     head->data = 7;
+//     head->next = second;
+
+//     // second & third node linked
+//     second->data = 14;
+//     second->next = third;
+
+//     // third & fourth node linked
+//     third->data = 13;
+//     third->next = fourth;
+
+//     // fourth & fifth node linked
+//     fourth->data = 83;
+//     fourth->next = fifth;
+
+//     // fifth node points to head Node
+//     fifth->data = 221;
+//     fifth->next = head; // circle back to the head node
+// };
+
+// void CircularLinkedListTraversal(struct Node *head)
+// {
+//     struct Node *ptr = head;
+//     //incrementing head manually by 1 so while loop activates
+//     // using do-while
+//     do{
+//         printf("Element is: %d\n", ptr->data);
+//         ptr = ptr->next;
+//     }while(ptr != head);
+
+// };
+
+// struct Node* insertAtHeadInCirclularLL(struct Node *head, int data){
+//     struct Node* ptr = (Node*)malloc(sizeof(Node));
+//     ptr->data = data;
+
+//     struct Node* p = head->next;
+//     while (p->next != head)
+//     {
+//         p = p->next;
+//     };
+//     // here p points to the last node of the circular LL
+
+//     p->next = ptr;
+//     ptr->next = head;
+//     head = ptr;
+//     return head;
+// };
+
+void DoublyLinkedList(){
+    head = (Node *)malloc(sizeof(Node));
+    second = (Node *)malloc(sizeof(Node));
+    third = (Node *)malloc(sizeof(Node));
+    fourth = (Node *)malloc(sizeof(Node));
+    fifth = (Node *)malloc(sizeof(Node));
+
+    // first & second node linked
+    head->data = 7;
+    head->prev = NULL;
+    head->next = second;
+
+    // second & third node linked
+    second->data = 14;
+    second->prev = head;
+    second->next = third;
+
+    // third & fourth node linked
+    third->data = 13;
+    third->prev = second;
+    third->next = fourth;
+
+    // fourth & fifth node linked
+    fourth->data = 83;
+    fourth->prev = third;
+    fourth->next = fifth;
+
+    // fifth node points to head Node
+    fifth->data = 221;
+    fifth->prev = fourth;
+    fifth->next = NULL; 
+};
+
+void DoublyLinkedListTraversal(struct Node *head)
+{
+    struct Node *ptr = head;
+    struct Node *last = NULL;
+
+    // forward traversal
+    while (ptr != NULL)
+    {
+        printf("Element is: %d\n", ptr->data);
+        last = ptr;
+        ptr = ptr->next;
+    }
+
+    //backward traversal
+    while (last != NULL)
+    {
+        printf("Element is: %d\n", last->data);
+        last = last->prev;
+    }
+    
+};
+
 int main()
 {
     // Linked List creation
-    CreateLinkedList();
+    //CreateLinkedList();
 
     //Inserting Node
     //head = InsertDataAtHead(head, 71);
@@ -282,8 +395,19 @@ int main()
     //head = DeleteSpecificNode(head, 100);
     //head = DeleteAtEnd(head);
 
+    //Circular Linked List
+    //CircularLinkedList();
+
+    //inserting in circular LL
+    //head = insertAtHeadInCirclularLL(head, 48);
+
+    //Doubly Linked List
+    DoublyLinkedList();
+
     // printing the list
-    LinkedListTraversal(head);
+    //LinkedListTraversal(head);
+    //CircularLinkedListTraversal(head);
+    DoublyLinkedListTraversal(head);
 
     return 0;
 };
