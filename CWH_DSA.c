@@ -102,56 +102,56 @@
 
 // Linked Lists
 
-typedef struct Node
-{
-    int data;
-    struct Node *next; // self-referencing pointer
-    struct Node *prev;
-} Node;
+// typedef struct Node
+// {
+//     int data;
+//     struct Node *next; // self-referencing pointer
+//     struct Node *prev;
+// } Node;
 
-struct Node *head;
-struct Node *second;
-struct Node *third;
-struct Node *fourth;
-struct Node *fifth;
+// struct Node *head;
+// struct Node *second;
+// struct Node *third;
+// struct Node *fourth;
+// struct Node *fifth;
 
-void CreateLinkedList(){
-    head = (Node *)malloc(sizeof(Node));
-    second = (Node *)malloc(sizeof(Node));
-    third = (Node *)malloc(sizeof(Node));
-    fourth = (Node *)malloc(sizeof(Node));
-    fifth = (Node *)malloc(sizeof(Node));
+// void CreateLinkedList(){
+//     head = (Node *)malloc(sizeof(Node));
+//     second = (Node *)malloc(sizeof(Node));
+//     third = (Node *)malloc(sizeof(Node));
+//     fourth = (Node *)malloc(sizeof(Node));
+//     fifth = (Node *)malloc(sizeof(Node));
 
-    // first & second node linked
-    head->data = 7;
-    head->next = second;
+//     // first & second node linked
+//     head->data = 7;
+//     head->next = second;
 
-    // second & third node linked
-    second->data = 14;
-    second->next = third;
+//     // second & third node linked
+//     second->data = 14;
+//     second->next = third;
 
-    // third & fourth node linked
-    third->data = 13;
-    third->next = fourth;
+//     // third & fourth node linked
+//     third->data = 13;
+//     third->next = fourth;
 
-    // fourth & fifth node linked
-    fourth->data = 83;
-    fourth->next = fifth;
+//     // fourth & fifth node linked
+//     fourth->data = 83;
+//     fourth->next = fifth;
 
-    // fifth node points to NULL
-    fifth->data = 221;
-    fifth->next = NULL; // terminate Linked list at last node
-};
+//     // fifth node points to NULL
+//     fifth->data = 221;
+//     fifth->next = NULL; // terminate Linked list at last node
+// };
 
-void LinkedListTraversal(struct Node *ptr)
-{
-    while (ptr != NULL)
-    {
-        printf("Element: %d\n", ptr->data);
-        ptr = ptr->next;
-    }
+// void LinkedListTraversal(struct Node *ptr)
+// {
+//     while (ptr != NULL)
+//     {
+//         printf("Element: %d\n", ptr->data);
+//         ptr = ptr->next;
+//     }
 
-};
+// };
 
 // Inserting data at head 
 // struct Node*  InsertDataAtHead(struct Node *head, int data){
@@ -323,63 +323,64 @@ void LinkedListTraversal(struct Node *ptr)
 //     return head;
 // };
 
-void DoublyLinkedList(){
-    head = (Node *)malloc(sizeof(Node));
-    second = (Node *)malloc(sizeof(Node));
-    third = (Node *)malloc(sizeof(Node));
-    fourth = (Node *)malloc(sizeof(Node));
-    fifth = (Node *)malloc(sizeof(Node));
+// void DoublyLinkedList(){
+//     head = (Node *)malloc(sizeof(Node));
+//     second = (Node *)malloc(sizeof(Node));
+//     third = (Node *)malloc(sizeof(Node));
+//     fourth = (Node *)malloc(sizeof(Node));
+//     fifth = (Node *)malloc(sizeof(Node));
 
-    // first & second node linked
-    head->data = 7;
-    head->prev = NULL;
-    head->next = second;
+//     // first & second node linked
+//     head->data = 7;
+//     head->prev = NULL;
+//     head->next = second;
 
-    // second & third node linked
-    second->data = 14;
-    second->prev = head;
-    second->next = third;
+//     // second & third node linked
+//     second->data = 14;
+//     second->prev = head;
+//     second->next = third;
 
-    // third & fourth node linked
-    third->data = 13;
-    third->prev = second;
-    third->next = fourth;
+//     // third & fourth node linked
+//     third->data = 13;
+//     third->prev = second;
+//     third->next = fourth;
 
-    // fourth & fifth node linked
-    fourth->data = 83;
-    fourth->prev = third;
-    fourth->next = fifth;
+//     // fourth & fifth node linked
+//     fourth->data = 83;
+//     fourth->prev = third;
+//     fourth->next = fifth;
 
-    // fifth node points to head Node
-    fifth->data = 221;
-    fifth->prev = fourth;
-    fifth->next = NULL; 
-};
+//     // fifth node points to head Node
+//     fifth->data = 221;
+//     fifth->prev = fourth;
+//     fifth->next = NULL; 
+// };
 
-void DoublyLinkedListTraversal(struct Node *head)
-{
-    struct Node *ptr = head;
-    struct Node *last = NULL;
+// void DoublyLinkedListTraversal(struct Node *head)
+// {
+//     struct Node *ptr = head;
+//     struct Node *last = NULL;
 
-    // forward traversal
-    while (ptr != NULL)
-    {
-        printf("Element is: %d\n", ptr->data);
-        last = ptr;
-        ptr = ptr->next;
-    }
+//     // forward traversal
+//     while (ptr != NULL)
+//     {
+//         printf("Element is: %d\n", ptr->data);
+//         last = ptr;
+//         ptr = ptr->next;
+//     }
 
-    //backward traversal
-    while (last != NULL)
-    {
-        printf("Element is: %d\n", last->data);
-        last = last->prev;
-    }
+//     //backward traversal
+//     while (last != NULL)
+//     {
+//         printf("Element is: %d\n", last->data);
+//         last = last->prev;
+//     }
     
-};
+// };
 
-int main()
-{
+
+//int main()
+//{
     // Linked List creation
     //CreateLinkedList();
 
@@ -402,12 +403,99 @@ int main()
     //head = insertAtHeadInCirclularLL(head, 48);
 
     //Doubly Linked List
-    DoublyLinkedList();
+    //DoublyLinkedList();
 
     // printing the list
     //LinkedListTraversal(head);
     //CircularLinkedListTraversal(head);
-    DoublyLinkedListTraversal(head);
+    //DoublyLinkedListTraversal(head);
 
+    //return 0;
+//};
+
+// ----------------------------------
+// stack using array
+typedef struct Stack
+{
+    int size;
+    int top;
+    int *arr;
+}Stack;
+
+int isEmpty(Stack *ptr){
+    if (ptr->top == -1)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+};
+int isFull(Stack *ptr){
+    if (ptr->top == (ptr->size - 1))
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+};
+int Push(Stack *ptr, int var){
+    if (isFull(ptr))
+    {
+        printf("The stack is full/stack overflow");
+    }
+    else
+    {
+        ptr->top++;
+        ptr->arr[ptr->top] = var;
+    }
+    return 0;
+};
+int Pop(Stack *ptr){
+    if (isEmpty(ptr))
+    {
+        printf("The stack is empty/stack underflow");
+    }
+    else
+    {
+        int val = ptr->arr[ptr->top];
+        ptr->top--;
+        return val;
+    }
+    return 0;
+};
+
+int main(){
+    //Stack S;
+    Stack *Sp = (Stack*)malloc(sizeof(Stack));
+    Sp->size = 5;
+    Sp->top = -1;
+    Sp->arr = (int*)calloc(Sp->size, sizeof(int));
+
+    // pushing an element
+    printf("Before Push:%d\n", isEmpty(Sp));
+    printf("Before Push:%d\n", isFull(Sp));
+    Push(Sp, 11);
+    Push(Sp, 12);
+    Push(Sp, 13);
+    Push(Sp, 14);
+    Push(Sp, 15);
+    printf("After Push:%d\n", isEmpty(Sp));
+    printf("After Push:%d\n\n", isFull(Sp));
+    
+    // popping an element
+    printf("Before Pop:%d\n", isEmpty(Sp));
+    printf("Before Pop:%d\n", isFull(Sp));
+    printf("Popped %d:\n",Pop(Sp)); // last element gets popped first - LIFO since Stack
+    printf("Popped %d:\n",Pop(Sp));
+    printf("Popped %d:\n",Pop(Sp));
+    printf("After Pop:%d\n", isEmpty(Sp));
+    printf("After Pop:%d\n", isFull(Sp));
+
+    free(Sp->arr);
+    free(Sp);
     return 0;
 };

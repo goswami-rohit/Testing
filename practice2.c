@@ -470,14 +470,96 @@
 //     return 0;
 // }
 
-int fucnction(int n){
-    int i;
-    for(i = 0; n != 0; n %=10, i++);
-    return i;
-}
+// int fucnction(int n){
+//     int i;
+//     for(i = 0; n != 0; n %=10, i++);
+//     return i;
+// }
+// int main(){
+//     int X;
+//     X = fucnction(32);
+//     printf("Ans: %d", X);
+//     return 0;
+// }
+
+// int main(){
+//     // An initial integer list is declared with integer values
+//     int intList[] = {12, 6, 22, 45, 221, 2, 90};
+//     // The size of that list is calculated dynamically
+//     int size = sizeof(intList)/sizeof(intList[0]);
+
+//     // assume first element is the min to start
+//     int minVal = intList[0];
+
+//     // loop through rest of the array -> start at index 1
+//     for (int i = 0; i < size; i++)
+//     {
+//         // If we find a number smaller than minVal -> update minVal
+//         if (intList[i] < minVal)
+//         {
+//             minVal = intList[i];
+//         }
+        
+//     }
+//     // print the final min value after the loop ends
+//     printf("Min Val: %d", minVal);
+    
+//     return 0;
+// };
+
+// declare a Node type to hold the values of actual data and address to the data
+typedef struct Node{
+    int data;
+    struct Node *next;
+}Node;
+
+// declare global Nodes
+struct Node *head;
+struct Node *second;
+struct Node *third;
+struct Node *fourth;
+
+void CreateSignlyLinkedList(){
+    // dynamically allocate memeory to the global Nodes
+    head = (Node*)malloc(sizeof(Node));
+    second = (Node*)malloc(sizeof(Node));
+    third = (Node*)malloc(sizeof(Node));
+    fourth = (Node*)malloc(sizeof(Node));
+
+    // link the Nodes:
+    // head & second
+    head->data = 8; // head stores value 8
+    head->next = second;  // head pointer points to second Node
+
+    // second & third
+    second->data = 22; // second stores value 22
+    second->next = third;  // second pointer points to third Node
+
+    // third & fourth
+    third->data = 20; // third stores value 20
+    third->next = fourth;  // third pointer points to fourth Node
+
+    // fourth & NULL
+    fourth->data = 8; // fourth stores value 8
+    fourth->next = NULL;  // fourth pointer points to NULL
+};
+
+void SinglyLLTraversalAndPrint(struct Node *p){
+    // run a loop and print the data of the linked list
+    while (p != NULL)
+    {
+        printf("Element is: %d\n", p->data);
+        // point the pointer to the next Node after the data is printed
+        p = p->next;
+    }
+    
+};
+
 int main(){
-    int X;
-    X = fucnction(32);
-    printf("Ans: %d", X);
+    // Call the create fucntion to create the Linked List
+    CreateSignlyLinkedList();
+
+    // Call the traversal & print function
+    SinglyLLTraversalAndPrint(head);
     return 0;
-}
+};
