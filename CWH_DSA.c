@@ -415,87 +415,210 @@
 
 // ----------------------------------
 // stack using array
-typedef struct Stack
-{
-    int size;
-    int top;
-    int *arr;
-}Stack;
+// typedef struct Stack
+// {
+//     int size;
+//     int top;
+//     int *arr;
+// }Stack;
 
-int isEmpty(Stack *ptr){
-    if (ptr->top == -1)
+// int isEmpty(Stack *ptr){
+//     if (ptr->top == -1)
+//     {
+//         return 1;
+//     }
+//     else
+//     {
+//         return 0;
+//     }
+// };
+// int isFull(Stack *ptr){
+//     if (ptr->top == (ptr->size - 1))
+//     {
+//         return 1;
+//     }
+//     else
+//     {
+//         return 0;
+//     }
+// };
+// int Push(Stack *ptr, int var){
+//     if (isFull(ptr))
+//     {
+//         printf("The stack is full/stack overflow");
+//     }
+//     else
+//     {
+//         ptr->top++;
+//         ptr->arr[ptr->top] = var;
+//     }
+//     return 0;
+// };
+// int Pop(Stack *ptr){
+//     if (isEmpty(ptr))
+//     {
+//         printf("The stack is empty/stack underflow");
+//     }
+//     else
+//     {
+//         int val = ptr->arr[ptr->top];
+//         ptr->top--;
+//         return val;
+//     }
+//     return 0;
+// };
+// int Peek(Stack *Sp, int i){
+//     if ((Sp->top - i + 1) < 0)
+//     {
+//         printf("Not valid position\n");
+//         return -1;
+//     }
+//     else
+//     {
+//         return (Sp->arr[Sp->top -i + 1]);
+//     }
+    
+//     return 0;
+// };
+
+// int main(){
+//     //Stack S;
+//     Stack *Sp = (Stack*)malloc(sizeof(Stack));
+//     Sp->size = 5;
+//     Sp->top = -1;
+//     Sp->arr = (int*)calloc(Sp->size, sizeof(int));
+
+//     // pushing an element
+//     printf("Before Push:%d\n", isEmpty(Sp));
+//     printf("Before Push:%d\n", isFull(Sp));
+//     Push(Sp, 11);
+//     Push(Sp, 12);
+//     Push(Sp, 13);
+//     Push(Sp, 14);
+//     Push(Sp, 15);
+//     printf("After Push:%d\n", isEmpty(Sp));
+//     printf("After Push:%d\n\n", isFull(Sp));
+    
+//     // popping an element
+//     // printf("Before Pop:%d\n", isEmpty(Sp));
+//     // printf("Before Pop:%d\n", isFull(Sp));
+//     // printf("Popped %d:\n",Pop(Sp)); // last element gets popped first - LIFO since Stack
+//     // printf("Popped %d:\n",Pop(Sp));
+//     // printf("Popped %d:\n",Pop(Sp));
+//     // printf("After Pop:%d\n", isEmpty(Sp));
+//     // printf("After Pop:%d\n", isFull(Sp));
+
+//     // peeking and element
+//     //int varb = 2;
+//     //printf("The value at pos %d is: %d\n", varb, Peek(Sp, varb));
+//     // peeking all elements
+//     for (int j = 0; j < (Sp->size); j++)
+//     {
+//         printf("The value at pos %d is: %d\n", j, Peek(Sp, j));
+//     };
+
+//     free(Sp->arr);
+//     free(Sp);
+//     return 0;
+// };
+
+// stack uisng Linked List
+typedef struct Node
+{
+    int data;
+    struct Node *next;
+}Node;
+
+int isEmpty(struct Node* top){
+    if (top == NULL)
     {
         return 1;
     }
-    else
-    {
-        return 0;
-    }
+    
+    return 0;
 };
-int isFull(Stack *ptr){
-    if (ptr->top == (ptr->size - 1))
+int isFull(struct Node* top){
+    Node *p = (Node*)calloc(1, sizeof(Node));
+    if (p == NULL)
     {
         return 1;
     }
-    else
-    {
-        return 0;
-    }
+    free(p);
+    return 0;
 };
-int Push(Stack *ptr, int var){
-    if (isFull(ptr))
+
+struct Node* Push(struct Node *top, int x){
+    if (isFull(top))
     {
-        printf("The stack is full/stack overflow");
+        printf("Stack Oveflow");
     }
     else
     {
-        ptr->top++;
-        ptr->arr[ptr->top] = var;
+        Node *n = (Node*)calloc(1, sizeof(Node));
+        n->data = x;
+        n->next = top;
+        top = n;
+        return top;
     }
     return 0;
 };
-int Pop(Stack *ptr){
-    if (isEmpty(ptr))
+int Pop(struct Node **top){
+    if (isEmpty(*top))
     {
-        printf("The stack is empty/stack underflow");
+        printf("Stack Undeflow");
     }
     else
     {
-        int val = ptr->arr[ptr->top];
-        ptr->top--;
-        return val;
+        Node *n = *top;
+        *top = (*top)->next;
+        int x = n->data;
+        free(n);
+        return x;
     }
     return 0;
+};
+int Peek( Node *top, int pos){
+    struct Node *ptr = top;
+    for (int i = 0; (i < pos-1 && ptr != NULL); i++)
+    {
+        ptr = ptr->next;
+    }
+    if (ptr != NULL)
+    {
+        return (ptr->data);
+    }
+    else
+    {
+        return -1;
+    }
+    
+    return 0;
+};
+
+void LLTraversal(Node *ptr){
+    while (ptr != NULL)
+    {
+        printf("Element :%d\n", ptr->data);
+        ptr = ptr->next;
+    }
 };
 
 int main(){
-    //Stack S;
-    Stack *Sp = (Stack*)malloc(sizeof(Stack));
-    Sp->size = 5;
-    Sp->top = -1;
-    Sp->arr = (int*)calloc(Sp->size, sizeof(int));
+    Node *top = NULL;
+    top = Push(top, 12);
+    top = Push(top, 13);
+    top = Push(top, 14);
+    top = Push(top, 15);
 
-    // pushing an element
-    printf("Before Push:%d\n", isEmpty(Sp));
-    printf("Before Push:%d\n", isFull(Sp));
-    Push(Sp, 11);
-    Push(Sp, 12);
-    Push(Sp, 13);
-    Push(Sp, 14);
-    Push(Sp, 15);
-    printf("After Push:%d\n", isEmpty(Sp));
-    printf("After Push:%d\n\n", isFull(Sp));
+    //int element = Pop(&top);
+    //printf("popped element is: %d\n", element);
+    //LLTraversal(top);
+    int peekpos;
+    printf("Enter Pos to Peek at: ");
+    scanf("%d", &peekpos);
     
-    // popping an element
-    printf("Before Pop:%d\n", isEmpty(Sp));
-    printf("Before Pop:%d\n", isFull(Sp));
-    printf("Popped %d:\n",Pop(Sp)); // last element gets popped first - LIFO since Stack
-    printf("Popped %d:\n",Pop(Sp));
-    printf("Popped %d:\n",Pop(Sp));
-    printf("After Pop:%d\n", isEmpty(Sp));
-    printf("After Pop:%d\n", isFull(Sp));
+    int peekval = Peek(top, peekpos);
+    printf("\nPeek val=%d at peek pos=%d\n", peekval, peekpos);
 
-    free(Sp->arr);
-    free(Sp);
     return 0;
 };
