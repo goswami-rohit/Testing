@@ -1000,14 +1000,198 @@
 
 // -----------------------------------
 // binary tress
+// typedef struct Node
+// {
+//     int data;
+//     struct Node *left;
+//     struct Node *right;
+// }Node;
+// struct Node* createNode(int data)
+// {
+//     struct Node *p = (Node*)malloc(sizeof(Node));
+//     p->data = data;
+//     p->left = NULL;
+//     p->right = NULL;
+//     return p;
+// };
+// void preOrder(struct Node* root){
+//     if (root != NULL)
+//     {
+//         printf("Root: %d\n", root->data);
+//         preOrder(root->left);
+//         preOrder(root->right);
+//     }
+// };
+// void postOrder(struct Node* root){
+//     if (root != NULL)
+//     {
+//         postOrder(root->left);
+//         postOrder(root->right);
+//         printf("Root: %d\n", root->data);
+//     }
+// };
+// void inOrder(struct Node* root){
+//     if (root != NULL)
+//     {
+//         inOrder(root->left);
+//         printf("Root: %d\n", root->data);
+//         inOrder(root->right);
+//     }
+// };
+// int main(){
+//     // nodes
+//     struct Node* p = createNode(4);
+//     struct Node* p1 = createNode(1);
+//     struct Node* p2 = createNode(6);
+//     struct Node* p3 = createNode(5);
+//     struct Node* p4 = createNode(2);
+
+//     // linking nodes
+//     p->left = p1;
+//     p->right = p2;
+//     p1->left = p3;
+//     p1->right = p4;
+
+//     printf("Pre Order Traversal\n");
+//     preOrder(p);
+//     printf("Post Order Traversal\n");
+//     postOrder(p);
+//     printf("In Order Traversal\n");
+//     inOrder(p);
+//     return 0;
+// };
+
+// binary search trees
 typedef struct Node
 {
     int data;
     struct Node *left;
     struct Node *right;
 }Node;
-
+struct Node* createNode(int data)
+{
+    struct Node *p = (Node*)malloc(sizeof(Node));
+    p->data = data;
+    p->left = NULL;
+    p->right = NULL;
+    return p;
+};
+void preOrder(struct Node* root){
+    if (root != NULL)
+    {
+        printf("Root: %d\n", root->data);
+        preOrder(root->left);
+        preOrder(root->right);
+    }
+};
+void postOrder(struct Node* root){
+    if (root != NULL)
+    {
+        postOrder(root->left);
+        postOrder(root->right);
+        printf("Root: %d\n", root->data);
+    }
+};
+void inOrder(struct Node* root){
+    if (root != NULL)
+    {
+        inOrder(root->left);
+        printf("Root: %d\n", root->data);
+        inOrder(root->right);
+    }
+};
+int isBST(struct Node* root){
+    static struct Node *prev = NULL;
+    if (root != NULL)
+    {
+        if (!isBST(root->left))
+        {
+            return 0;
+        }
+        if(prev != NULL && root->data <= prev->data)
+        {
+            printf("Its not a BST. End program\n");
+            return 0;
+        }
+        prev = root;
+        return isBST(root->right);
+    }
+    return 1;
+};
+struct Node *search(Node *root, int key){
+    if (root == NULL)
+        return NULL;
+    
+    if (root->data == key)
+    {
+        return root;
+    }
+    else if (root->data > key)
+    {
+        return search(root->left, key);
+    }
+    else {
+        return search(root->right, key);
+    }
+};
+struct Node *searchIter(Node *root, int key){
+    while (root != NULL)
+    {
+        if (key == root->data){
+            return root;
+        }
+        else if (key < root->data)
+        {
+            root = root->left;
+        }
+        else
+        {
+            root = root->right;
+        }
+    }
+    return NULL;
+};
 int main(){
+    // nodes
+    struct Node *p = createNode(5);
+    struct Node *p1 = createNode(3);
+    struct Node *p2 = createNode(8);
+    struct Node *p3 = createNode(2);
+    struct Node *p4 = createNode(4);
 
+    // linking nodes
+    p->left = p1;
+    p->right = p2;
+    p1->left = p3;
+    p1->right = p4;
+
+    //printf("Pre Order Traversal\n");
+    //preOrder(p);
+    //printf("Post Order Traversal\n");
+    //postOrder(p);
+    //printf("In Order Traversal\n");
+    //inOrder(p);
+    //printf("Checking isBST\n");
+    //isBST(p);
+    // printf("Searching in BST\n");
+    // struct Node *n = search(p, 8);
+    // if (n != NULL)
+    // {
+    //     printf("Found:%d\n", n->data);
+    // }
+    // else
+    // {
+    //     printf("Element Not Found\n");    
+    // }
+    printf("Searching in BST with Iteration\n");
+    struct Node *n = searchIter(p, 81);
+    if (n != NULL)
+    {
+        printf("Found:%d\n", n->data);
+    }
+    else
+    {
+        printf("Element Not Found\n");    
+    }
     return 0;
 };
